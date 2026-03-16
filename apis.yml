@@ -1,14 +1,20 @@
+aid: vineyard
 name: Vineyard
 description: An in-memory metadata service for sharing, discovering, and accessing
   distributed objects in Python, developed for big data analytics workflows.
+type: Index
 url: https://v6d.io/
 tags:
-- Distributed Systems
-- Python
-- Metadata Management
-- Big Data
-- In-Memory Storage
+  - Distributed Systems
+  - Python
+  - Metadata Management
+  - Big Data
+  - In-Memory Storage
 created: '2025'
-modified: '2025'
+modified: '2026-03-16'
+specificationVersion: '0.19'
 apis: []
 common: []
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
