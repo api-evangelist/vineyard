@@ -1,0 +1,282 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Vineyard Data Sharing Workflow"
+  description: >-
+    Workflow capability for sharing distributed in-memory objects across computation
+    engines using Vineyard. Supports data scientists and ML engineers managing
+    zero-copy data sharing, object lifecycle, and Kubernetes cluster operations
+    for big data analytics pipelines.
+  tags:
+    - Big Data
+    - CNCF
+    - Cloud Native
+    - Data Engineering
+    - Distributed Systems
+    - In-Memory Storage
+    - Machine Learning
+    - Python
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      VINEYARD_IPC_SOCKET: VINEYARD_IPC_SOCKET
+
+capability:
+  consumes:
+    - import: vineyard-client
+      location: ./shared/vineyard-python-client.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: vineyard-data-sharing-api
+      description: "Unified REST API for vineyard data sharing and object lifecycle management."
+      resources:
+        - path: /v1/connect
+          name: connection
+          description: "Server connection management"
+          operations:
+            - method: POST
+              name: connect-to-server
+              description: "Connect to a vineyard in-memory server"
+              call: "vineyard-client.connect-to-server"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/objects
+          name: objects
+          description: "Distributed in-memory object storage"
+          operations:
+            - method: POST
+              name: put-object
+              description: "Store an object in vineyard shared memory"
+              call: "vineyard-client.put-object"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/objects/{objectId}
+          name: object-by-id
+          description: "Object access by ID"
+          operations:
+            - method: GET
+              name: get-object
+              description: "Retrieve an in-memory object by its ID"
+              call: "vineyard-client.get-object"
+              with:
+                objectId: "rest.objectId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-object
+              description: "Remove an object from vineyard memory"
+              call: "vineyard-client.delete-object"
+              with:
+                objectId: "rest.objectId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/objects/{objectId}/metadata
+          name: object-metadata
+          description: "Object metadata inspection"
+          operations:
+            - method: GET
+              name: get-object-metadata
+              description: "Inspect metadata including typename, size, and location"
+              call: "vineyard-client.get-object-metadata"
+              with:
+                objectId: "rest.objectId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/objects/{objectId}/persist
+          name: object-persistence
+          description: "Object persistence across cluster instances"
+          operations:
+            - method: POST
+              name: persist-object
+              description: "Persist object for cluster-wide visibility"
+              call: "vineyard-client.persist-object"
+              with:
+                objectId: "rest.objectId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/names
+          name: names
+          description: "Human-readable names for objects"
+          operations:
+            - method: POST
+              name: put-name
+              description: "Register a name for an object"
+              call: "vineyard-client.put-name"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/names/{name}
+          name: name-lookup
+          description: "Name-to-ID resolution"
+          operations:
+            - method: GET
+              name: get-by-name
+              description: "Resolve a name to its ObjectID"
+              call: "vineyard-client.get-by-name"
+              with:
+                name: "rest.name"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/blobs
+          name: blobs
+          description: "Raw memory blob management"
+          operations:
+            - method: POST
+              name: create-blob
+              description: "Allocate a raw memory blob for custom data"
+              call: "vineyard-client.create-blob"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/blobs/{objectId}
+          name: blob-by-id
+          description: "Blob retrieval"
+          operations:
+            - method: GET
+              name: get-blob
+              description: "Retrieve a raw memory blob by ID"
+              call: "vineyard-client.get-blob"
+              with:
+                objectId: "rest.objectId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: vineyard-data-sharing-mcp
+      transport: http
+      description: "MCP server for AI-assisted vineyard data sharing and object lifecycle management."
+      tools:
+        - name: connect-to-vineyard
+          description: "Connect to a vineyard in-memory data manager server via IPC or TCP"
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "vineyard-client.connect-to-server"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: store-object
+          description: "Store a Python object in vineyard shared memory for zero-copy sharing"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "vineyard-client.put-object"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: retrieve-object
+          description: "Retrieve a distributed in-memory object by its ObjectID"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "vineyard-client.get-object"
+          with:
+            objectId: "tools.objectId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: inspect-object-metadata
+          description: "Inspect metadata for a vineyard object including type, size, and cluster location"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "vineyard-client.get-object-metadata"
+          with:
+            objectId: "tools.objectId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: remove-object
+          description: "Delete a vineyard object from shared memory"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "vineyard-client.delete-object"
+          with:
+            objectId: "tools.objectId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: persist-object-globally
+          description: "Make a vineyard object visible across all cluster instances"
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "vineyard-client.persist-object"
+          with:
+            objectId: "tools.objectId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: register-object-name
+          description: "Associate a human-readable name with a vineyard ObjectID for discovery"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "vineyard-client.put-name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: lookup-object-by-name
+          description: "Resolve a named vineyard object to its ObjectID"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "vineyard-client.get-by-name"
+          with:
+            name: "tools.name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: allocate-blob
+          description: "Allocate a raw memory blob in vineyard for low-level data operations"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "vineyard-client.create-blob"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: retrieve-blob
+          description: "Retrieve a raw memory blob from vineyard storage"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "vineyard-client.get-blob"
+          with:
+            objectId: "tools.objectId"
+          outputParameters:
+            - type: object
+              mapping: "$."

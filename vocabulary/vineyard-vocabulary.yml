@@ -1,0 +1,172 @@
+name: Vineyard Vocabulary
+description: >-
+  Domain vocabulary for the Vineyard (v6d) in-memory immutable data manager,
+  covering distributed systems, data sharing, metadata management, and Kubernetes
+  cloud-native deployment concepts.
+version: 0.19.0
+source: https://v6d.io/
+terms:
+  - term: Vineyard
+    definition: >-
+      An in-memory immutable data manager (v6d) providing zero-copy data sharing
+      across distributed computation systems. A CNCF TAG-Storage project.
+    aliases:
+      - v6d
+    tags:
+      - Core
+
+  - term: ObjectID
+    definition: >-
+      A 64-bit unsigned integer uniquely identifying a vineyard object within
+      the cluster. Represented as a hex string in JSON contexts.
+    tags:
+      - Core
+      - Identity
+
+  - term: IPCClient
+    definition: >-
+      A vineyard client that connects via UNIX domain socket for zero-copy
+      in-process memory sharing using mmap and file descriptor transfer.
+    tags:
+      - Client
+      - Connection
+
+  - term: RPCClient
+    definition: >-
+      A vineyard client that connects via TCP for remote access to vineyard
+      instances. Does not provide zero-copy but can retrieve metadata and payloads.
+    tags:
+      - Client
+      - Connection
+
+  - term: ObjectMeta
+    definition: >-
+      A dict-like container holding metadata for a vineyard object, including
+      typename, memory footprint, cluster location, and custom key-value properties.
+    tags:
+      - Metadata
+
+  - term: GlobalObject
+    definition: >-
+      A vineyard object whose metadata is stored in etcd and is accessible
+      across the entire cluster. Composed of multiple LocalObjects.
+    tags:
+      - Object
+      - Distributed
+
+  - term: LocalObject
+    definition: >-
+      A vineyard object whose metadata is stored locally in a single vineyard
+      instance. The building block of GlobalObjects.
+    tags:
+      - Object
+      - Distributed
+
+  - term: Blob
+    definition: >-
+      A raw memory region in vineyard shared memory. The lowest-level storage
+      primitive from which higher-level objects are constructed.
+    tags:
+      - Storage
+      - Memory
+
+  - term: SharedMemory
+    definition: >-
+      The memory region managed by vineyard for zero-copy sharing between
+      processes on the same host, accessed via UNIX domain socket.
+    tags:
+      - Storage
+      - Memory
+
+  - term: MetadataManager
+    definition: >-
+      The vineyard server component that maintains metadata (structures, layouts,
+      and properties) of stored objects using a key-value backend (etcd or Redis).
+    tags:
+      - Server
+      - Metadata
+
+  - term: Vineyardd
+    definition: >-
+      The vineyard daemon process (server). Manages shared memory, handles
+      client connections, and coordinates metadata with the cluster via etcd.
+    tags:
+      - Server
+      - Deployment
+
+  - term: VineyardOperator
+    definition: >-
+      The Kubernetes operator that manages the lifecycle of Vineyard clusters,
+      defining CRDs including Vineyardd, Sidecar, GlobalObject, and Operation.
+    tags:
+      - Kubernetes
+      - Operator
+
+  - term: Sidecar
+    definition: >-
+      A vineyard container injected alongside application containers in
+      Kubernetes pods to provide shared memory access without a full daemon.
+    tags:
+      - Kubernetes
+      - Deployment
+
+  - term: Operation
+    definition: >-
+      A Kubernetes CRD defining inter-workload data operations such as assembly
+      (combining partitions) and repartition (redistributing data).
+    tags:
+      - Kubernetes
+      - Data Operations
+
+  - term: Assembly
+    definition: >-
+      A vineyard operation that combines distributed LocalObject partitions into
+      a unified GlobalObject accessible across the cluster.
+    tags:
+      - Data Operations
+
+  - term: Repartition
+    definition: >-
+      A vineyard operation that redistributes distributed data partitions across
+      cluster instances to match downstream computation requirements.
+    tags:
+      - Data Operations
+
+  - term: Builder
+    definition: >-
+      A client-side component that serializes Python, C++, or other language
+      objects into vineyard's shared memory format.
+    tags:
+      - Client
+      - Serialization
+
+  - term: Resolver
+    definition: >-
+      A client-side component that deserializes vineyard objects back into
+      native Python, C++, or other language types.
+    tags:
+      - Client
+      - Serialization
+
+  - term: ZeroCopy
+    definition: >-
+      The data transfer mode where objects are shared via memory mapping without
+      serialization or deserialization, eliminating data copy overhead.
+    tags:
+      - Performance
+      - Core
+
+  - term: vineyardctl
+    definition: >-
+      The command-line tool for managing vineyard clusters, deploying operators,
+      and interacting with vineyard on Kubernetes.
+    tags:
+      - CLI
+      - Tools
+
+  - term: Persist
+    definition: >-
+      The operation of making a local vineyard object globally visible across
+      the cluster by promoting its metadata to etcd.
+    tags:
+      - Object Lifecycle

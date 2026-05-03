@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vineyard/main/json-schema/vineyard-metadata-schema.json",
+  "title": "Vineyard Object Metadata",
+  "description": "Schema for the metadata container of a Vineyard object, providing key-value properties, nested member objects, and type information",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The ObjectID as a hex string"
+    },
+    "typename": {
+      "type": "string",
+      "description": "The fully qualified type name"
+    },
+    "nbytes": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Memory footprint in bytes"
+    },
+    "isglobal": {
+      "type": "boolean",
+      "description": "Whether this is a global object"
+    },
+    "islocal": {
+      "type": "boolean",
+      "description": "Whether this is a local object"
+    },
+    "instance_id": {
+      "type": "integer",
+      "description": "Vineyard instance ID"
+    },
+    "hostname": {
+      "type": "string",
+      "description": "Hostname of the vineyard instance"
+    },
+    "extra": {
+      "type": "object",
+      "description": "Custom key-value metadata properties specific to the object type",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "examples": [
+        {
+          "shape_": "[100, 50]",
+          "dtype_": "float64",
+          "partition_index_": "0"
+        }
+      ]
+    },
+    "members": {
+      "type": "object",
+      "description": "Nested member objects (for composite types like DataFrame, Graph)",
+      "additionalProperties": {
+        "$ref": "#"
+      }
+    }
+  },
+  "required": ["id", "typename"]
+}

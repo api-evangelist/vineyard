@@ -1,0 +1,15 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/names/shared-tensor-v1",
+    "parameters": {
+      "wait": false
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "object_id": "0000000700063960"
+    }
+  }
+}

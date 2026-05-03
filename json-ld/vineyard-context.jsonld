@@ -1,0 +1,96 @@
+{
+  "@context": {
+    "@vocab": "https://v6d.io/vocab/",
+    "schema": "https://schema.org/",
+    "k8s": "https://kubernetes.io/",
+
+    "VineyardObject": {
+      "@id": "https://v6d.io/vocab/VineyardObject",
+      "@type": "@id"
+    },
+    "VineyardMetadata": {
+      "@id": "https://v6d.io/vocab/VineyardMetadata",
+      "@type": "@id"
+    },
+    "VineyardInstance": {
+      "@id": "https://v6d.io/vocab/VineyardInstance",
+      "@type": "@id"
+    },
+    "GlobalObject": {
+      "@id": "https://v6d.io/vocab/GlobalObject",
+      "@type": "@id"
+    },
+    "LocalObject": {
+      "@id": "https://v6d.io/vocab/LocalObject",
+      "@type": "@id"
+    },
+    "Blob": {
+      "@id": "https://v6d.io/vocab/Blob",
+      "@type": "@id"
+    },
+
+    "id": {
+      "@id": "schema:identifier"
+    },
+    "typename": {
+      "@id": "https://v6d.io/vocab/typename"
+    },
+    "nbytes": {
+      "@id": "schema:fileSize"
+    },
+    "isglobal": {
+      "@id": "https://v6d.io/vocab/isglobal",
+      "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+    },
+    "islocal": {
+      "@id": "https://v6d.io/vocab/islocal",
+      "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+    },
+    "instance_id": {
+      "@id": "https://v6d.io/vocab/instanceId"
+    },
+    "hostname": {
+      "@id": "schema:serverName"
+    },
+    "signature": {
+      "@id": "https://v6d.io/vocab/signature"
+    },
+    "members": {
+      "@id": "https://v6d.io/vocab/members",
+      "@container": "@list"
+    },
+    "socket": {
+      "@id": "https://v6d.io/vocab/ipcSocket"
+    },
+    "name": {
+      "@id": "schema:name"
+    },
+    "description": {
+      "@id": "schema:description"
+    },
+    "version": {
+      "@id": "schema:version"
+    },
+
+    "Vineyardd": {
+      "@id": "https://v6d.io/vocab/Vineyardd",
+      "@type": "@id"
+    },
+    "Sidecar": {
+      "@id": "https://v6d.io/vocab/Sidecar",
+      "@type": "@id"
+    },
+    "Operation": {
+      "@id": "https://v6d.io/vocab/Operation",
+      "@type": "@id"
+    },
+    "Backup": {
+      "@id": "https://v6d.io/vocab/Backup",
+      "@type": "@id"
+    },
+    "Recover": {
+      "@id": "https://v6d.io/vocab/Recover",
+      "@type": "@id"
+    }
+  }
+}

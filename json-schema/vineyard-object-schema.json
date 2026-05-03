@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vineyard/main/json-schema/vineyard-object-schema.json",
+  "title": "Vineyard Object",
+  "description": "Schema for a Vineyard in-memory object including its ID, type, and location within the distributed cluster",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The 64-bit unsigned integer ObjectID as a hex string",
+      "pattern": "^[0-9a-f]{16}$",
+      "example": "0000000700063960"
+    },
+    "typename": {
+      "type": "string",
+      "description": "The fully qualified C++ type name of the stored object",
+      "examples": [
+        "vineyard::Scalar<std::string>",
+        "vineyard::Tensor<float64>",
+        "vineyard::DataFrame",
+        "vineyard::RecordBatch",
+        "vineyard::Graph"
+      ]
+    },
+    "nbytes": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Memory footprint of the object in bytes"
+    },
+    "isglobal": {
+      "type": "boolean",
+      "description": "Whether the object is globally persistent and visible across all vineyard instances"
+    },
+    "islocal": {
+      "type": "boolean",
+      "description": "Whether the object is local to the connected vineyard instance"
+    },
+    "instance_id": {
+      "type": "integer",
+      "description": "The vineyard server instance ID where this object resides"
+    },
+    "hostname": {
+      "type": "string",
+      "description": "Hostname of the vineyard server instance holding this object"
+    },
+    "signature": {
+      "type": "string",
+      "description": "Object signature for content addressing and deduplication"
+    },
+    "members": {
+      "type": "array",
+      "description": "For global objects: list of LocalObject IDs composing this distributed object",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": ["id", "typename", "nbytes"]
+}

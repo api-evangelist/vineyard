@@ -1,0 +1,17 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/objects",
+    "body": {
+      "value": "Hello, vineyard!",
+      "persist": false,
+      "name": "my-greeting"
+    }
+  },
+  "response": {
+    "status": 201,
+    "body": {
+      "object_id": "0000000700063960"
+    }
+  }
+}

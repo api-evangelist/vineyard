@@ -1,0 +1,21 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/objects/0000000700063960/metadata"
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "id": "0000000700063960",
+      "typename": "vineyard::Scalar<std::string>",
+      "nbytes": 16,
+      "isglobal": false,
+      "islocal": true,
+      "instance_id": 0,
+      "hostname": "vineyard-server-0",
+      "extra": {
+        "value_": "Hello, vineyard!"
+      }
+    }
+  }
+}

@@ -1,0 +1,85 @@
+extends: spectral:oas
+rules:
+  vineyard-operation-ids-kebab-case:
+    description: Operation IDs should use camelCase consistent with vineyard Python SDK naming
+    message: "Operation ID '{{value}}' should be camelCase"
+    severity: warn
+    given: "$.paths[*][*].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]+$"
+
+  vineyard-tags-required:
+    description: All operations must have at least one tag for grouping
+    message: "Operation is missing tags - use Connection, Objects, Metadata, Names, Blobs, or Persistence"
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      field: tags
+      function: truthy
+
+  vineyard-path-kebab-case:
+    description: All path segments should use kebab-case
+    message: "Path '{{path}}' should use kebab-case"
+    severity: warn
+    given: "$.paths"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(/[a-z0-9-{}/]+)+$"
+
+  vineyard-description-required:
+    description: All operations must have a description
+    message: "Operation at '{{path}}' is missing a description"
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      field: description
+      function: truthy
+
+  vineyard-response-200-or-201:
+    description: Successful operations should return 200 or 201
+    message: "Operation should define a 200 or 201 success response"
+    severity: warn
+    given: "$.paths[*][post,put,patch]"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          oneOf:
+            - required: ['200']
+            - required: ['201']
+
+  vineyard-object-id-string:
+    description: >-
+      ObjectIDs in vineyard are 64-bit unsigned integers represented as strings
+      for JSON compatibility
+    message: "ObjectID path parameter should be type string"
+    severity: warn
+    given: "$.paths[*][*].parameters[?(@.name == 'objectId')]"
+    then:
+      field: schema.type
+      function: enumeration
+      functionOptions:
+        values:
+          - string
+
+  vineyard-server-defined:
+    description: At least one server must be defined in the spec
+    message: "The spec should define at least one server"
+    severity: error
+    given: "$"
+    then:
+      field: servers
+      function: truthy
+
+  vineyard-info-contact:
+    description: The info object should include contact information
+    message: "info.contact should be defined for community support"
+    severity: warn
+    given: "$.info"
+    then:
+      field: contact
+      function: truthy

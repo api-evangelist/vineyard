@@ -1,0 +1,54 @@
+{
+  "name": "VineyardObject",
+  "description": "A Vineyard in-memory object with its identity, type, and lifecycle properties",
+  "fields": [
+    {
+      "name": "id",
+      "type": "string",
+      "description": "64-bit ObjectID as hex string",
+      "required": true
+    },
+    {
+      "name": "typename",
+      "type": "string",
+      "description": "Fully qualified C++ type name (e.g., vineyard::Tensor<float64>)",
+      "required": true
+    },
+    {
+      "name": "nbytes",
+      "type": "integer",
+      "description": "Memory footprint in bytes",
+      "required": true
+    },
+    {
+      "name": "isglobal",
+      "type": "boolean",
+      "description": "Visible across the entire cluster",
+      "required": false
+    },
+    {
+      "name": "islocal",
+      "type": "boolean",
+      "description": "Local to the connected instance",
+      "required": false
+    },
+    {
+      "name": "instance_id",
+      "type": "integer",
+      "description": "Vineyard instance hosting this object",
+      "required": false
+    },
+    {
+      "name": "hostname",
+      "type": "string",
+      "description": "Hostname of the instance",
+      "required": false
+    },
+    {
+      "name": "signature",
+      "type": "string",
+      "description": "Content-addressable signature",
+      "required": false
+    }
+  ]
+}

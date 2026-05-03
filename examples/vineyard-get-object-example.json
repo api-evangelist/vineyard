@@ -1,0 +1,17 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/objects/0000000700063960",
+    "parameters": {
+      "fetch": false
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "object_id": "0000000700063960",
+      "value": "Hello, vineyard!",
+      "typename": "vineyard::Scalar<std::string>"
+    }
+  }
+}

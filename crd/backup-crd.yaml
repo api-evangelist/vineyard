@@ -1,0 +1,57 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: backups.k8s.v6d.io
+spec:
+  group: k8s.v6d.io
+  names:
+    kind: Backup
+    listKind: BackupList
+    plural: backups
+    singular: backup
+  scope: Namespaced
+  versions:
+    - name: v1alpha1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          description: >-
+            Backup manages backup operations for vineyard objects using Kubernetes
+            PersistentVolumes to persist in-memory data to durable storage.
+          properties:
+            apiVersion:
+              type: string
+            kind:
+              type: string
+            metadata:
+              type: object
+            spec:
+              type: object
+              properties:
+                vineyarddName:
+                  type: string
+                  description: Name of the Vineyardd resource to back up
+                vineyarddNamespace:
+                  type: string
+                  description: Namespace of the Vineyardd resource
+                limit:
+                  type: integer
+                  description: Maximum number of objects to include in the backup
+                backupPath:
+                  type: string
+                  description: Path within PersistentVolume to store backup files
+                persistentVolumeSpec:
+                  type: object
+                  description: PersistentVolume specification for backup storage
+                  x-kubernetes-preserve-unknown-fields: true
+                persistentVolumeClaimSpec:
+                  type: object
+                  description: PersistentVolumeClaim specification for backup storage
+                  x-kubernetes-preserve-unknown-fields: true
+            status:
+              type: object
+              properties:
+                state:
+                  type: string

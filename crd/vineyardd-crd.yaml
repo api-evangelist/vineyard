@@ -1,0 +1,108 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: vineyardds.k8s.v6d.io
+spec:
+  group: k8s.v6d.io
+  names:
+    kind: Vineyardd
+    listKind: VineyarddList
+    plural: vineyardds
+    singular: vineyardd
+  scope: Namespaced
+  versions:
+    - name: v1alpha1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          description: >-
+            Vineyardd is the Schema for deploying a vineyard cluster on Kubernetes.
+            It simplifies configuration of the vineyard binary, external etcd cluster,
+            and overall deployment.
+          properties:
+            apiVersion:
+              type: string
+            kind:
+              type: string
+            metadata:
+              type: object
+            spec:
+              type: object
+              description: VineyarddSpec defines the desired state of Vineyardd
+              properties:
+                replicas:
+                  type: integer
+                  description: Number of vineyard daemon replicas
+                  default: 1
+                vineyard:
+                  type: object
+                  description: VineyardConfig for the vineyard daemon container
+                  properties:
+                    image:
+                      type: string
+                      description: Container image for vineyard daemon
+                    memory:
+                      type: string
+                      description: Memory allocation for shared memory
+                    socket:
+                      type: string
+                      description: UNIX domain socket path for IPC connections
+                    reserveMemory:
+                      type: boolean
+                      description: Whether to reserve memory on startup
+                service:
+                  type: object
+                  description: ServiceConfig for the vineyard daemon service
+                  properties:
+                    type:
+                      type: string
+                      description: Kubernetes service type (ClusterIP, NodePort, etc.)
+                    port:
+                      type: integer
+                      description: Port for RPC connections
+                metric:
+                  type: object
+                  description: MetricConfig for monitoring and observability
+                  properties:
+                    enable:
+                      type: boolean
+                    image:
+                      type: string
+                etcd:
+                  type: object
+                  description: Etcd cluster configuration for metadata storage
+                  properties:
+                    replicas:
+                      type: integer
+                spill:
+                  type: object
+                  description: SpillConfig for memory spilling behavior
+                  properties:
+                    name:
+                      type: string
+                    path:
+                      type: string
+                    spillLowerRate:
+                      type: string
+                    spillUpperRate:
+                      type: string
+                pluginImage:
+                  type: object
+                  description: PluginImageConfig for backup and recovery
+                  properties:
+                    backupImage:
+                      type: string
+                    recoverImage:
+                      type: string
+                    repartitionImage:
+                      type: string
+            status:
+              type: object
+              description: VineyarddStatus defines the observed state of Vineyardd
+              properties:
+                conditions:
+                  type: array
+                  items:
+                    type: object

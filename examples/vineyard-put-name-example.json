@@ -1,0 +1,14 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/names",
+    "body": {
+      "object_id": "0000000700063960",
+      "name": "shared-tensor-v1"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {}
+  }
+}
