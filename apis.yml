@@ -93,7 +93,7 @@ common:
     url: json-schema/vineyard-object-schema.json
   - type: JSONSchema
     url: json-schema/vineyard-metadata-schema.json
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/vineyard-context.jsonld
   - type: Vocabulary
     url: vocabulary/vineyard-vocabulary.yml
