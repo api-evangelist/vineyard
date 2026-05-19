@@ -1,0 +1,172 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Vineyard Python Client API — Objects
+  description: 'Vineyard Python Client API — Objects. 3 operations. Lead operation: Put Object. Self-contained Naftiko capability
+    covering one Vineyard business surface.'
+  tags:
+  - Vineyard
+  - Objects
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VINEYARD_API_KEY: VINEYARD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: python-client-objects
+    baseUri: ''
+    description: Vineyard Python Client API — Objects business capability. Self-contained, no shared references.
+    resources:
+    - name: objects
+      path: /objects
+      operations:
+      - name: putobject
+        method: POST
+        description: Put Object
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: objects-objectId
+      path: /objects/{objectId}
+      operations:
+      - name: getobject
+        method: GET
+        description: Get Object
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: objectId
+          in: path
+          type: string
+          description: The 64-bit unsigned integer ObjectID
+          required: true
+        - name: fetch
+          in: query
+          type: boolean
+          description: Whether to fetch remote objects via RPC if not local
+      - name: deleteobject
+        method: DELETE
+        description: Delete Object
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: objectId
+          in: path
+          type: string
+          description: The ObjectID to delete
+          required: true
+        - name: force
+          in: query
+          type: boolean
+          description: Force deletion even if the object is referenced
+        - name: deep
+          in: query
+          type: boolean
+          description: Recursively delete member objects
+  exposes:
+  - type: rest
+    namespace: python-client-objects-rest
+    port: 8080
+    description: REST adapter for Vineyard Python Client API — Objects. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/objects
+      name: objects
+      description: REST surface for objects.
+      operations:
+      - method: POST
+        name: putobject
+        description: Put Object
+        call: python-client-objects.putobject
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/objects/{objectid}
+      name: objects-objectid
+      description: REST surface for objects-objectId.
+      operations:
+      - method: GET
+        name: getobject
+        description: Get Object
+        call: python-client-objects.getobject
+        with:
+          objectId: rest.objectId
+          fetch: rest.fetch
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteobject
+        description: Delete Object
+        call: python-client-objects.deleteobject
+        with:
+          objectId: rest.objectId
+          force: rest.force
+          deep: rest.deep
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: python-client-objects-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Vineyard Python Client API — Objects. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: put-object
+      description: Put Object
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: python-client-objects.putobject
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-object
+      description: Get Object
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: python-client-objects.getobject
+      with:
+        objectId: tools.objectId
+        fetch: tools.fetch
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-object
+      description: Delete Object
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: python-client-objects.deleteobject
+      with:
+        objectId: tools.objectId
+        force: tools.force
+        deep: tools.deep
+      outputParameters:
+      - type: object
+        mapping: $.
