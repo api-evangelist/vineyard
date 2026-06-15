@@ -1,0 +1,1653 @@
+{
+  "item": [
+    {
+      "id": "a325b087-e138-4876-917e-ba2a1a45dbfb",
+      "name": "Connection",
+      "description": {
+        "content": "Connect to and disconnect from a vineyard server",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "69828ac7-f6f5-4238-978d-613a6bc727dd",
+          "name": "Connect to Server",
+          "request": {
+            "name": "Connect to Server",
+            "description": {
+              "content": "Establish a connection to a vineyard server via IPC socket or TCP endpoint. Returns a client object (IPCClient or RPCClient) for subsequent operations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "connect"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{socket}}",
+                  "key": "socket"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"socket\": \"<string>\",\n  \"host\": \"<string>\",\n  \"port\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "53010e99-f4ee-4874-af29-88fa028332f8",
+              "name": "Successfully connected to vineyard server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{socket}}",
+                      "key": "socket"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"socket\": \"/var/run/vineyard.sock\",\n  \"host\": \"<string>\",\n  \"port\": 9600\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"instance_id\": 5938,\n  \"version\": \"string\",\n  \"ipc_socket\": \"string\",\n  \"rpc_endpoint\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60edda3d-38f8-4932-9446-ac1882e37b0b",
+              "name": "Server unavailable or connection failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{socket}}",
+                      "key": "socket"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"socket\": \"/var/run/vineyard.sock\",\n  \"host\": \"<string>\",\n  \"port\": 9600\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "c3134ee4-8cfe-48e4-b222-24412b3e157d",
+      "name": "Objects",
+      "description": {
+        "content": "Store and retrieve in-memory objects",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3ac78233-e038-415b-a281-09a069019196",
+          "name": "Put Object",
+          "request": {
+            "name": "Put Object",
+            "description": {
+              "content": "Store a Python object in vineyard. Returns the ObjectID for later retrieval. Optionally persist the object for cross-instance visibility or associate a name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "objects"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{socket}}",
+                  "key": "socket"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"value\": {},\n  \"persist\": false,\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "414ae93f-5bb6-4cea-8ef4-2ed4b6dbd6f0",
+              "name": "Object stored successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{socket}}",
+                      "key": "socket"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"value\": {},\n  \"persist\": false,\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "293b65a2-46c8-4f7c-9d8a-71f58cf57f73",
+              "name": "Invalid object or unsupported type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{socket}}",
+                      "key": "socket"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"value\": {},\n  \"persist\": false,\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d8ee1188-9d14-48c7-9885-33c4557c7962",
+          "name": "Get Object",
+          "request": {
+            "name": "Get Object",
+            "description": {
+              "content": "Retrieve a vineyard object by its ObjectID, deserializing it back to a Python value.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "objects",
+                ":objectId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fetch",
+                  "value": "false",
+                  "description": "Whether to fetch remote objects via RPC if not local"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "objectId",
+                  "description": "(Required) The 64-bit unsigned integer ObjectID"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{socket}}",
+                  "key": "socket"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "55368e8f-7019-4953-b815-7c72ea0ee5ed",
+              "name": "Object retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objects",
+                    ":objectId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fetch",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "objectId",
+                      "description": "(Required) The 64-bit unsigned integer ObjectID"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{socket}}",
+                      "key": "socket"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object_id\": \"string\",\n  \"value\": {},\n  \"typename\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2f95866e-b2bc-4f12-ba88-fff0668cc6ae",
+              "name": "Object not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objects",
+                    ":objectId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fetch",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "objectId",
+                      "description": "(Required) The 64-bit unsigned integer ObjectID"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{socket}}",
+                      "key": "socket"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fea18abc-2255-4197-8591-5e2625287e6f",
+          "name": "Delete Object",
+          "request": {
+            "name": "Delete Object",
+            "description": {
+              "content": "Remove a vineyard object from memory by its ObjectID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "objects",
+                ":objectId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "force",
+                  "value": "true",
+                  "description": "Force deletion even if the object is referenced"
+                },
+                {
+                  "disabled": false,
+                  "key": "deep",
+                  "value": "true",
+                  "description": "Recursively delete member objects"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "objectId",
+                  "description": "(Required) The ObjectID to delete"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{socket}}",
+                  "key": "socket"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f8227eee-5346-4b81-9a88-948b54a2431d",
+              "name": "Object deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objects",
+                    ":objectId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force",
+                      "value": "true"
+                    },
+                    {
+                      "key": "deep",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "objectId",
+                      "description": "(Required) The ObjectID to delete"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{socket}}",
+                      "key": "socket"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8d56a280-1c6e-45e2-8ff5-4b04e3cf673a",
+              "name": "Object not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objects",
+                    ":objectId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force",
+                      "value": "true"
+                    },
+                    {
+                      "key": "deep",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "objectId",
+                      "description": "(Required) The ObjectID to delete"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{socket}}",
+                      "key": "socket"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "5939f2ab-482c-4a16-be50-5c9e68df186f",
+      "name": "Metadata",
+      "description": {
+        "content": "Inspect and manage object metadata",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6e1a7e6f-3fa8-4457-b61d-9cea6ca57500",
+          "name": "Get Object Metadata",
+          "request": {
+            "name": "Get Object Metadata",
+            "description": {
+              "content": "Fetch the metadata of a vineyard object, including typename, nbytes, isglobal, islocal, and all custom key-value metadata properties.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "objects",
+                ":objectId",
+                "metadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "objectId",
+                  "description": "(Required) The ObjectID to inspect"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{socket}}",
+                  "key": "socket"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0bd34d33-38ad-45e6-9d62-53cea148bf4d",
+              "name": "Metadata retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objects",
+                    ":objectId",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "objectId",
+                      "description": "(Required) The ObjectID to inspect"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{socket}}",
+                      "key": "socket"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"typename\": \"string\",\n  \"nbytes\": 7793,\n  \"isglobal\": false,\n  \"islocal\": false,\n  \"instance_id\": 1342,\n  \"hostname\": \"string\",\n  \"extra\": {\n    \"key_0\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6811564-fb72-4ea2-9b9f-61c0f5720184",
+              "name": "Object not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objects",
+                    ":objectId",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "objectId",
+                      "description": "(Required) The ObjectID to inspect"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{socket}}",
+                      "key": "socket"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "0c717604-0d7b-4845-b80b-1ceb079985e3",
+      "name": "Names",
+      "description": {
+        "content": "Associate human-readable names with object IDs",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b4db4a96-c508-4185-8261-14a0d992f06e",
+          "name": "Associate Name with Object",
+          "request": {
+            "name": "Associate Name with Object",
+            "description": {
+              "content": "Associate a human-readable name string with a vineyard ObjectID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "names"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{socket}}",
+                  "key": "socket"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"object_id\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "51944dfb-2202-4135-aead-729e08113008",
+              "name": "Name associated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "names"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{socket}}",
+                      "key": "socket"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_id\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7a2aad42-56f5-40b9-8464-9f0e65249281",
+              "name": "Name already in use",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "names"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{socket}}",
+                      "key": "socket"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_id\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee5742ca-a03b-4e56-a55f-f3af6c2a3b0c",
+          "name": "Get Object by Name",
+          "request": {
+            "name": "Get Object by Name",
+            "description": {
+              "content": "Retrieve the ObjectID associated with a human-readable name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "names",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "wait",
+                  "value": "false",
+                  "description": "Block until the name becomes available"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) The human-readable name"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{socket}}",
+                  "key": "socket"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "60af9b71-a35e-49eb-bc0c-0383f368c8f5",
+              "name": "ObjectID retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "names",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "wait",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The human-readable name"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{socket}}",
+                      "key": "socket"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b6e0185-62cb-429d-adb6-3c9a39cf2ccd",
+              "name": "Name not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "names",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "wait",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) The human-readable name"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{socket}}",
+                      "key": "socket"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "4a0516c3-6595-4803-ac4a-50c84677ffc2",
+      "name": "Blobs",
+      "description": {
+        "content": "Low-level blob storage operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f85d8740-591d-4bcc-a0da-a992243fdcd4",
+          "name": "Create Blob",
+          "request": {
+            "name": "Create Blob",
+            "description": {
+              "content": "Allocate a raw memory blob of the specified size in vineyard.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "blobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{socket}}",
+                  "key": "socket"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"size\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f7834300-923d-4072-8ffa-7ec25eef422d",
+              "name": "Blob created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{socket}}",
+                      "key": "socket"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"size\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object_id\": \"string\",\n  \"size\": 8782,\n  \"buffer\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8073bd00-dafa-41c0-b4d8-f12bbaf0d7ae",
+          "name": "Get Blob",
+          "request": {
+            "name": "Get Blob",
+            "description": {
+              "content": "Retrieve a raw memory blob by its ObjectID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "blobs",
+                ":objectId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "remote",
+                  "value": "false",
+                  "description": "Retrieve blob from a remote vineyard instance"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "objectId",
+                  "description": "(Required) "
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{socket}}",
+                  "key": "socket"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "902c29ba-a040-4c65-8208-727340566d9e",
+              "name": "Blob retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blobs",
+                    ":objectId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "remote",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "objectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{socket}}",
+                      "key": "socket"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object_id\": \"string\",\n  \"size\": 8782,\n  \"buffer\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25856434-2075-4374-b9f3-0314f9bcccfa",
+              "name": "Blob not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blobs",
+                    ":objectId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "remote",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "objectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{socket}}",
+                      "key": "socket"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "131bbf9d-679b-45ec-b412-c3db6ace6e4e",
+      "name": "Persistence",
+      "description": {
+        "content": "Persist objects for cross-instance visibility",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "565c72db-bf4d-42e4-b255-502e0b3a3ea9",
+          "name": "Persist Object",
+          "request": {
+            "name": "Persist Object",
+            "description": {
+              "content": "Make a vineyard object persistent, making it visible across all vineyard server instances in the cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "objects",
+                ":objectId",
+                "persist"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "objectId",
+                  "description": "(Required) The ObjectID to persist"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{socket}}",
+                  "key": "socket"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1a5ea1b9-f5ef-42f6-8231-f1b5645d468d",
+              "name": "Object persisted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objects",
+                    ":objectId",
+                    "persist"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "objectId",
+                      "description": "(Required) The ObjectID to persist"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{socket}}",
+                      "key": "socket"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7fda2ffe-0d79-45fa-814c-b410fce5155b",
+              "name": "Object not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objects",
+                    ":objectId",
+                    "persist"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "objectId",
+                      "description": "(Required) The ObjectID to persist"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{socket}}",
+                      "key": "socket"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "/var/run/vineyard.sock",
+      "key": "socket"
+    },
+    {
+      "type": "string",
+      "value": "ipc://{{socket}}",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "14ebcc4a-33e6-40df-b326-0ffdd209925a",
+    "name": "Vineyard Python Client API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Vineyard Python client API provides programmatic access to the Vineyard in-memory immutable data manager (v6d), a CNCF project. Clients connect via IPC (UNIX domain socket) for zero-copy local access or via RPC (TCP) for remote access. The API supports storing, retrieving, naming, persisting, and deleting distributed in-memory objects.\n\nContact Support:\n Name: Vineyard Community",
+      "type": "text/plain"
+    }
+  }
+}

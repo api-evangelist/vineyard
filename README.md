@@ -1,101 +1,97 @@
-# Vineyard
+# Vineyard (vineyard)
 
-Vineyard (v6d) is an in-memory immutable data manager developed under CNCF TAG-Storage. It provides efficient zero-copy data sharing across distributed systems for big data analytics, machine learning, and data-intensive workflows.
+Vineyard (v6d) is an in-memory immutable data manager developed under CNCF TAG-Storage. It provides efficient zero-copy data sharing across distributed systems for big data analytics, machine learning, and data-intensive workflows. Vineyard enables seamless object sharing between computation engines through a metadata-payload separation architecture, supporting Python, C++, Rust, and Go clients. The Vineyard Operator provides Kubernetes-native deployment with CRDs for managing clusters, sidecars, backups, and data operations.
 
-**Website:** https://v6d.io/  
-**GitHub:** https://github.com/v6d-io/v6d  
-**Documentation:** https://v6d.io/docs.html
+**APIs.json:** [https://v6d.io/](https://v6d.io/)
+
+## Scope
+
+- **Type:** Index
+
+## Tags
+
+- Big Data
+- CNCF
+- Cloud Native
+- Data Engineering
+- Distributed Systems
+- In-Memory Storage
+- Kubernetes
+- Machine Learning
+- Metadata Management
+- Python
+- Zero-Copy
+
+## Timestamps
+
+- **Created:** 2025
+- **Modified:** 2026-05-19
 
 ## APIs
 
 ### Vineyard Python Client API
 
-The Python client provides IPC (UNIX domain socket) and RPC (TCP) access to vineyard for storing, retrieving, and managing distributed in-memory objects.
+The Vineyard Python client API provides programmatic access to the Vineyard in-memory data manager. It supports IPC (UNIX domain socket) and RPC (TCP) connections for storing, retrieving, and managing distributed in-memory objects. Key operations include put, get, delete, persist, and metadata inspection.
 
-- **OpenAPI Spec:** [openapi/vineyard-python-client-openapi.yml](openapi/vineyard-python-client-openapi.yml)
-- **Documentation:** https://v6d.io/notes/references/python-api.html
-- **Getting Started:** https://v6d.io/notes/getting-started.html
+- **Human URL:** [https://v6d.io/notes/references/python-api.html](https://v6d.io/notes/references/python-api.html)
+
+#### Tags
+
+- Python
+- Client
+- In-Memory Storage
+- Distributed Systems
+
+#### Properties
+
+- [OpenAPI](openapi/vineyard-python-client-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/vineyard-python-client.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/vineyard-python-client.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Documentation](https://v6d.io/notes/references/python-api.html)
+- [Getting Started](https://v6d.io/notes/getting-started.html)
 
 ### Vineyard Kubernetes Operator
 
-The Vineyard Operator manages vineyard cluster lifecycle on Kubernetes using CRDs.
+The Vineyard Kubernetes Operator manages vineyard cluster lifecycle and orchestrates shared objects on Kubernetes. It defines CRDs including Vineyardd, Sidecar, GlobalObject, LocalObject, Backup, Recover, Operation, and CSIDriver for deploying and managing Vineyard in cloud-native environments.
 
-- **Documentation:** https://v6d.io/notes/cloud-native/vineyard-operator.html
-- **CRD Reference:** https://v6d.io/notes/references/crds.html
+- **Human URL:** [https://v6d.io/notes/cloud-native/vineyard-operator.html](https://v6d.io/notes/cloud-native/vineyard-operator.html)
 
-## Kubernetes CRDs
+#### Tags
 
-| CRD | File | Description |
-|-----|------|-------------|
-| Vineyardd | [crd/vineyardd-crd.yaml](crd/vineyardd-crd.yaml) | Deploy a vineyard cluster on Kubernetes |
-| LocalObject | [crd/localobject-crd.yaml](crd/localobject-crd.yaml) | Local vineyard object metadata |
-| GlobalObject | [crd/globalobject-crd.yaml](crd/globalobject-crd.yaml) | Cluster-wide distributed object metadata |
-| Sidecar | [crd/sidecar-crd.yaml](crd/sidecar-crd.yaml) | Vineyard sidecar container configuration |
-| Operation | [crd/operation-crd.yaml](crd/operation-crd.yaml) | Assembly and repartition operations |
-| Backup | [crd/backup-crd.yaml](crd/backup-crd.yaml) | Backup vineyard objects to PersistentVolumes |
-| Recover | [crd/recover-crd.yaml](crd/recover-crd.yaml) | Restore vineyard objects from backups |
+- Kubernetes
+- Operator
+- Cloud Native
+- CNCF
 
-## Capabilities
+#### Properties
 
-### Shared Definitions
+- [Documentation](https://v6d.io/notes/cloud-native/vineyard-operator.html)
+- [Documentation](https://v6d.io/notes/references/crds.html)
+- [Kubernetes C R D](crd/vineyardd-crd.yaml)
+- [Kubernetes C R D](crd/localobject-crd.yaml)
+- [Kubernetes C R D](crd/globalobject-crd.yaml)
+- [Kubernetes C R D](crd/sidecar-crd.yaml)
+- [Kubernetes C R D](crd/operation-crd.yaml)
+- [Kubernetes C R D](crd/backup-crd.yaml)
+- [Kubernetes C R D](crd/recover-crd.yaml)
+- [Postman Collection](collections/vineyard-python-client.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/vineyard-python-client.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
-| File | Description |
-|------|-------------|
-| [capabilities/shared/vineyard-python-client.yaml](capabilities/shared/vineyard-python-client.yaml) | Per-API capability definition for the Python Client API |
+## Common Properties
 
-### Workflow Capabilities
-
-| File | Description |
-|------|-------------|
-| [capabilities/data-sharing-workflow.yaml](capabilities/data-sharing-workflow.yaml) | Data sharing and object lifecycle management for ML and data engineering workflows |
-
-## JSON Schemas
-
-| File | Description |
-|------|-------------|
-| [json-schema/vineyard-object-schema.json](json-schema/vineyard-object-schema.json) | Schema for Vineyard in-memory objects |
-| [json-schema/vineyard-metadata-schema.json](json-schema/vineyard-metadata-schema.json) | Schema for object metadata containers |
-
-## JSON Structure
-
-| File | Description |
-|------|-------------|
-| [json-structure/vineyard-object-structure.json](json-structure/vineyard-object-structure.json) | Structure documentation for Vineyard objects |
-
-## JSON-LD Context
-
-| File | Description |
-|------|-------------|
-| [json-ld/vineyard-context.jsonld](json-ld/vineyard-context.jsonld) | Linked data context mapping vineyard concepts to schema.org |
-
-## Examples
-
-| File | Description |
-|------|-------------|
-| [examples/vineyard-connect-to-server-example.json](examples/vineyard-connect-to-server-example.json) | Connect to vineyard server |
-| [examples/vineyard-put-object-example.json](examples/vineyard-put-object-example.json) | Store an object in vineyard |
-| [examples/vineyard-get-object-example.json](examples/vineyard-get-object-example.json) | Retrieve an object by ID |
-| [examples/vineyard-get-object-metadata-example.json](examples/vineyard-get-object-metadata-example.json) | Inspect object metadata |
-| [examples/vineyard-put-name-example.json](examples/vineyard-put-name-example.json) | Associate a name with an object |
-| [examples/vineyard-get-by-name-example.json](examples/vineyard-get-by-name-example.json) | Resolve a name to an ObjectID |
-
-## Rules
-
-| File | Description |
-|------|-------------|
-| [rules/vineyard-rules.yml](rules/vineyard-rules.yml) | Spectral ruleset enforcing vineyard API conventions |
-
-## Vocabulary
-
-| File | Description |
-|------|-------------|
-| [vocabulary/vineyard-vocabulary.yml](vocabulary/vineyard-vocabulary.yml) | Domain vocabulary for vineyard concepts |
-
-## Tags
-
-Big Data, CNCF, Cloud Native, Data Engineering, Distributed Systems, In-Memory Storage, Kubernetes, Machine Learning, Metadata Management, Python, Zero-Copy
+- [LinkedIn](https://www.linkedin.com/company/vineyard-vines)
+- [Website](https://v6d.io/)
+- [Documentation](https://v6d.io/docs.html)
+- [Git Hub Org](https://github.com/v6d-io)
+- [Git Hub](https://github.com/v6d-io/v6d)
+- [Getting Started](https://v6d.io/notes/getting-started.html)
+- [JSON Schema](json-schema/vineyard-object-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/vineyard-metadata-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON-LD](json-ld/vineyard-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+- [Vocabulary](vocabulary/vineyard-vocabulary.yml)
+- [Spectral Rules](rules/vineyard-rules.yml)
 
 ## Maintainers
 
-**FN:** Kin Lane  
+**FN:** Kin Lane
 **Email:** kin@apievangelist.com

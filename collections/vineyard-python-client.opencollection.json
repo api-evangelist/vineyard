@@ -1,0 +1,261 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vineyard Python Client API",
+    "version": "0.19.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Connection",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Connect to Server",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "ipc://{socket}/connect",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Establish a connection to a vineyard server via IPC socket or TCP endpoint. Returns a client object (IPCClient or RPCClient) for subsequent operations."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Objects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Put Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "ipc://{socket}/objects",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Store a Python object in vineyard. Returns the ObjectID for later retrieval. Optionally persist the object for cross-instance visibility or associate a name."
+        },
+        {
+          "info": {
+            "name": "Get Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "ipc://{socket}/objects/:objectId",
+            "params": [
+              {
+                "name": "objectId",
+                "value": "",
+                "type": "path",
+                "description": "The 64-bit unsigned integer ObjectID"
+              },
+              {
+                "name": "fetch",
+                "value": "",
+                "type": "query",
+                "description": "Whether to fetch remote objects via RPC if not local"
+              }
+            ]
+          },
+          "docs": "Retrieve a vineyard object by its ObjectID, deserializing it back to a Python value."
+        },
+        {
+          "info": {
+            "name": "Delete Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "ipc://{socket}/objects/:objectId",
+            "params": [
+              {
+                "name": "objectId",
+                "value": "",
+                "type": "path",
+                "description": "The ObjectID to delete"
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query",
+                "description": "Force deletion even if the object is referenced"
+              },
+              {
+                "name": "deep",
+                "value": "",
+                "type": "query",
+                "description": "Recursively delete member objects"
+              }
+            ]
+          },
+          "docs": "Remove a vineyard object from memory by its ObjectID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Object Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "ipc://{socket}/objects/:objectId/metadata",
+            "params": [
+              {
+                "name": "objectId",
+                "value": "",
+                "type": "path",
+                "description": "The ObjectID to inspect"
+              }
+            ]
+          },
+          "docs": "Fetch the metadata of a vineyard object, including typename, nbytes, isglobal, islocal, and all custom key-value metadata properties."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Persistence",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Persist Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "ipc://{socket}/objects/:objectId/persist",
+            "params": [
+              {
+                "name": "objectId",
+                "value": "",
+                "type": "path",
+                "description": "The ObjectID to persist"
+              }
+            ]
+          },
+          "docs": "Make a vineyard object persistent, making it visible across all vineyard server instances in the cluster."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Names",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Associate Name with Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "ipc://{socket}/names",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Associate a human-readable name string with a vineyard ObjectID."
+        },
+        {
+          "info": {
+            "name": "Get Object by Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "ipc://{socket}/names/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The human-readable name"
+              },
+              {
+                "name": "wait",
+                "value": "",
+                "type": "query",
+                "description": "Block until the name becomes available"
+              }
+            ]
+          },
+          "docs": "Retrieve the ObjectID associated with a human-readable name."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Blobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Blob",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "ipc://{socket}/blobs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allocate a raw memory blob of the specified size in vineyard."
+        },
+        {
+          "info": {
+            "name": "Get Blob",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "ipc://{socket}/blobs/:objectId",
+            "params": [
+              {
+                "name": "objectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "remote",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve blob from a remote vineyard instance"
+              }
+            ]
+          },
+          "docs": "Retrieve a raw memory blob by its ObjectID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
