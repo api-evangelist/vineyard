@@ -1,0 +1,15 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: v6d.io
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 19 07:58:51 2026 GMT
+  hsts: false
+domains:
+- domain: v6d.io
+  dnssec: false
+  caa: []
+  spf: false
+  dmarc: false

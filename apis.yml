@@ -75,6 +75,8 @@ apis:
       - type: KubernetesCRD
         url: crd/recover-crd.yaml
 common:
+  - type: DomainSecurity
+    url: security/vineyard-domain-security.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/vineyard-vines
   - type: Website
