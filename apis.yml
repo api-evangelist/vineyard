@@ -75,6 +75,8 @@ apis:
       - type: KubernetesCRD
         url: crd/recover-crd.yaml
 common:
+  - type: AgenticAccess
+    url: agentic-access/vineyard-agentic-access.yml
   - type: DomainSecurity
     url: security/vineyard-domain-security.yml
   - type: LinkedIn
