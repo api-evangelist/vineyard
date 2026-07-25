@@ -1,0 +1,149 @@
+openapi: 3.1.0
+info:
+  title: Vineyard Python Client Blobs Objects API
+  description: The Vineyard Python client API provides programmatic access to the Vineyard in-memory immutable data manager (v6d), a CNCF project. Clients connect via IPC (UNIX domain socket) for zero-copy local access or via RPC (TCP) for remote access. The API supports storing, retrieving, naming, persisting, and deleting distributed in-memory objects.
+  version: 0.19.0
+  contact:
+    name: Vineyard Community
+    url: https://v6d.io/
+  license:
+    name: Apache 2.0
+    url: https://github.com/v6d-io/v6d/blob/main/LICENSE
+servers:
+- url: ipc://{socket}
+  description: IPC socket connection (local zero-copy access)
+  variables:
+    socket:
+      default: /var/run/vineyard.sock
+- url: tcp://{host}:{port}
+  description: RPC TCP connection (remote access)
+  variables:
+    host:
+      default: localhost
+    port:
+      default: '9600'
+tags:
+- name: Objects
+  description: Store and retrieve in-memory objects
+paths:
+  /objects:
+    post:
+      operationId: putObject
+      summary: Put Object
+      description: Store a Python object in vineyard. Returns the ObjectID for later retrieval. Optionally persist the object for cross-instance visibility or associate a name.
+      tags:
+      - Objects
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutObjectRequest'
+      responses:
+        '201':
+          description: Object stored successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIDResponse'
+        '400':
+          description: Invalid object or unsupported type
+  /objects/{objectId}:
+    get:
+      operationId: getObject
+      summary: Get Object
+      description: Retrieve a vineyard object by its ObjectID, deserializing it back to a Python value.
+      tags:
+      - Objects
+      parameters:
+      - name: objectId
+        in: path
+        required: true
+        description: The 64-bit unsigned integer ObjectID
+        schema:
+          type: string
+      - name: fetch
+        in: query
+        required: false
+        description: Whether to fetch remote objects via RPC if not local
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Object retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectResponse'
+        '404':
+          description: Object not found
+    delete:
+      operationId: deleteObject
+      summary: Delete Object
+      description: Remove a vineyard object from memory by its ObjectID.
+      tags:
+      - Objects
+      parameters:
+      - name: objectId
+        in: path
+        required: true
+        description: The ObjectID to delete
+        schema:
+          type: string
+      - name: force
+        in: query
+        required: false
+        description: Force deletion even if the object is referenced
+        schema:
+          type: boolean
+          default: true
+      - name: deep
+        in: query
+        required: false
+        description: Recursively delete member objects
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '204':
+          description: Object deleted successfully
+        '404':
+          description: Object not found
+components:
+  schemas:
+    ObjectIDResponse:
+      type: object
+      description: Response containing a vineyard ObjectID
+      properties:
+        object_id:
+          type: string
+          description: The 64-bit unsigned integer ObjectID as a string
+    ObjectResponse:
+      type: object
+      description: Response containing a retrieved vineyard object
+      properties:
+        object_id:
+          type: string
+          description: The ObjectID of the retrieved object
+        value:
+          description: The deserialized Python object value
+        typename:
+          type: string
+          description: The vineyard type name of the object
+    PutObjectRequest:
+      type: object
+      description: Request to store an object in vineyard
+      properties:
+        value:
+          description: The Python object to store (serialized representation)
+        persist:
+          type: boolean
+          description: Whether to immediately persist the object globally
+          default: false
+        name:
+          type: string
+          description: Optional human-readable name to associate
+externalDocs:
+  description: Vineyard Python API Reference
+  url: https://v6d.io/notes/references/python-api.html

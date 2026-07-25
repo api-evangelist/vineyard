@@ -1,0 +1,98 @@
+openapi: 3.1.0
+info:
+  title: Vineyard Python Client Blobs Names API
+  description: The Vineyard Python client API provides programmatic access to the Vineyard in-memory immutable data manager (v6d), a CNCF project. Clients connect via IPC (UNIX domain socket) for zero-copy local access or via RPC (TCP) for remote access. The API supports storing, retrieving, naming, persisting, and deleting distributed in-memory objects.
+  version: 0.19.0
+  contact:
+    name: Vineyard Community
+    url: https://v6d.io/
+  license:
+    name: Apache 2.0
+    url: https://github.com/v6d-io/v6d/blob/main/LICENSE
+servers:
+- url: ipc://{socket}
+  description: IPC socket connection (local zero-copy access)
+  variables:
+    socket:
+      default: /var/run/vineyard.sock
+- url: tcp://{host}:{port}
+  description: RPC TCP connection (remote access)
+  variables:
+    host:
+      default: localhost
+    port:
+      default: '9600'
+tags:
+- name: Names
+  description: Associate human-readable names with object IDs
+paths:
+  /names:
+    post:
+      operationId: putName
+      summary: Associate Name with Object
+      description: Associate a human-readable name string with a vineyard ObjectID.
+      tags:
+      - Names
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - object_id
+              - name
+              properties:
+                object_id:
+                  type: string
+                  description: The ObjectID to associate with the name
+                name:
+                  type: string
+                  description: Human-readable name string
+      responses:
+        '200':
+          description: Name associated successfully
+        '409':
+          description: Name already in use
+  /names/{name}:
+    get:
+      operationId: getByName
+      summary: Get Object by Name
+      description: Retrieve the ObjectID associated with a human-readable name.
+      tags:
+      - Names
+      parameters:
+      - name: name
+        in: path
+        required: true
+        description: The human-readable name
+        schema:
+          type: string
+      - name: wait
+        in: query
+        required: false
+        description: Block until the name becomes available
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: ObjectID retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectIDResponse'
+        '404':
+          description: Name not found
+components:
+  schemas:
+    ObjectIDResponse:
+      type: object
+      description: Response containing a vineyard ObjectID
+      properties:
+        object_id:
+          type: string
+          description: The 64-bit unsigned integer ObjectID as a string
+externalDocs:
+  description: Vineyard Python API Reference
+  url: https://v6d.io/notes/references/python-api.html

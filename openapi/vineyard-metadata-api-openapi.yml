@@ -1,0 +1,86 @@
+openapi: 3.1.0
+info:
+  title: Vineyard Python Client Blobs Metadata API
+  description: The Vineyard Python client API provides programmatic access to the Vineyard in-memory immutable data manager (v6d), a CNCF project. Clients connect via IPC (UNIX domain socket) for zero-copy local access or via RPC (TCP) for remote access. The API supports storing, retrieving, naming, persisting, and deleting distributed in-memory objects.
+  version: 0.19.0
+  contact:
+    name: Vineyard Community
+    url: https://v6d.io/
+  license:
+    name: Apache 2.0
+    url: https://github.com/v6d-io/v6d/blob/main/LICENSE
+servers:
+- url: ipc://{socket}
+  description: IPC socket connection (local zero-copy access)
+  variables:
+    socket:
+      default: /var/run/vineyard.sock
+- url: tcp://{host}:{port}
+  description: RPC TCP connection (remote access)
+  variables:
+    host:
+      default: localhost
+    port:
+      default: '9600'
+tags:
+- name: Metadata
+  description: Inspect and manage object metadata
+paths:
+  /objects/{objectId}/metadata:
+    get:
+      operationId: getObjectMetadata
+      summary: Get Object Metadata
+      description: Fetch the metadata of a vineyard object, including typename, nbytes, isglobal, islocal, and all custom key-value metadata properties.
+      tags:
+      - Metadata
+      parameters:
+      - name: objectId
+        in: path
+        required: true
+        description: The ObjectID to inspect
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Metadata retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectMetadata'
+        '404':
+          description: Object not found
+components:
+  schemas:
+    ObjectMetadata:
+      type: object
+      description: Metadata for a vineyard object
+      properties:
+        id:
+          type: string
+          description: The ObjectID
+        typename:
+          type: string
+          description: Type name of the object (e.g., vineyard::Tensor<float64>, vineyard::DataFrame, vineyard::RecordBatch)
+        nbytes:
+          type: integer
+          description: Memory size in bytes
+        isglobal:
+          type: boolean
+          description: Whether the object is globally persistent across instances
+        islocal:
+          type: boolean
+          description: Whether the object is local to this vineyard instance
+        instance_id:
+          type: integer
+          description: The vineyard instance ID where the object resides
+        hostname:
+          type: string
+          description: Hostname of the vineyard instance
+        extra:
+          type: object
+          description: Additional custom key-value metadata properties
+          additionalProperties:
+            type: string
+externalDocs:
+  description: Vineyard Python API Reference
+  url: https://v6d.io/notes/references/python-api.html

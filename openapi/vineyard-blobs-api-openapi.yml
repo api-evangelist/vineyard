@@ -1,0 +1,101 @@
+openapi: 3.1.0
+info:
+  title: Vineyard Python Client Blobs API
+  description: The Vineyard Python client API provides programmatic access to the Vineyard in-memory immutable data manager (v6d), a CNCF project. Clients connect via IPC (UNIX domain socket) for zero-copy local access or via RPC (TCP) for remote access. The API supports storing, retrieving, naming, persisting, and deleting distributed in-memory objects.
+  version: 0.19.0
+  contact:
+    name: Vineyard Community
+    url: https://v6d.io/
+  license:
+    name: Apache 2.0
+    url: https://github.com/v6d-io/v6d/blob/main/LICENSE
+servers:
+- url: ipc://{socket}
+  description: IPC socket connection (local zero-copy access)
+  variables:
+    socket:
+      default: /var/run/vineyard.sock
+- url: tcp://{host}:{port}
+  description: RPC TCP connection (remote access)
+  variables:
+    host:
+      default: localhost
+    port:
+      default: '9600'
+tags:
+- name: Blobs
+  description: Low-level blob storage operations
+paths:
+  /blobs:
+    post:
+      operationId: createBlob
+      summary: Create Blob
+      description: Allocate a raw memory blob of the specified size in vineyard.
+      tags:
+      - Blobs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - size
+              properties:
+                size:
+                  type: integer
+                  description: Number of bytes to allocate
+      responses:
+        '201':
+          description: Blob created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlobInfo'
+  /blobs/{objectId}:
+    get:
+      operationId: getBlob
+      summary: Get Blob
+      description: Retrieve a raw memory blob by its ObjectID.
+      tags:
+      - Blobs
+      parameters:
+      - name: objectId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: remote
+        in: query
+        required: false
+        description: Retrieve blob from a remote vineyard instance
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Blob retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlobInfo'
+        '404':
+          description: Blob not found
+components:
+  schemas:
+    BlobInfo:
+      type: object
+      description: Information about a raw vineyard blob
+      properties:
+        object_id:
+          type: string
+          description: The ObjectID of the blob
+        size:
+          type: integer
+          description: Size of the blob in bytes
+        buffer:
+          type: string
+          description: Base64-encoded blob data (for remote blobs)
+externalDocs:
+  description: Vineyard Python API Reference
+  url: https://v6d.io/notes/references/python-api.html

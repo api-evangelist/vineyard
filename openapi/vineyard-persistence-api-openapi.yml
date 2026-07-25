@@ -1,0 +1,50 @@
+openapi: 3.1.0
+info:
+  title: Vineyard Python Client Blobs Persistence API
+  description: The Vineyard Python client API provides programmatic access to the Vineyard in-memory immutable data manager (v6d), a CNCF project. Clients connect via IPC (UNIX domain socket) for zero-copy local access or via RPC (TCP) for remote access. The API supports storing, retrieving, naming, persisting, and deleting distributed in-memory objects.
+  version: 0.19.0
+  contact:
+    name: Vineyard Community
+    url: https://v6d.io/
+  license:
+    name: Apache 2.0
+    url: https://github.com/v6d-io/v6d/blob/main/LICENSE
+servers:
+- url: ipc://{socket}
+  description: IPC socket connection (local zero-copy access)
+  variables:
+    socket:
+      default: /var/run/vineyard.sock
+- url: tcp://{host}:{port}
+  description: RPC TCP connection (remote access)
+  variables:
+    host:
+      default: localhost
+    port:
+      default: '9600'
+tags:
+- name: Persistence
+  description: Persist objects for cross-instance visibility
+paths:
+  /objects/{objectId}/persist:
+    post:
+      operationId: persistObject
+      summary: Persist Object
+      description: Make a vineyard object persistent, making it visible across all vineyard server instances in the cluster.
+      tags:
+      - Persistence
+      parameters:
+      - name: objectId
+        in: path
+        required: true
+        description: The ObjectID to persist
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Object persisted successfully
+        '404':
+          description: Object not found
+externalDocs:
+  description: Vineyard Python API Reference
+  url: https://v6d.io/notes/references/python-api.html

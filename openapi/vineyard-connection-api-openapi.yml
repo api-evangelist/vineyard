@@ -1,0 +1,83 @@
+openapi: 3.1.0
+info:
+  title: Vineyard Python Client Blobs Connection API
+  description: The Vineyard Python client API provides programmatic access to the Vineyard in-memory immutable data manager (v6d), a CNCF project. Clients connect via IPC (UNIX domain socket) for zero-copy local access or via RPC (TCP) for remote access. The API supports storing, retrieving, naming, persisting, and deleting distributed in-memory objects.
+  version: 0.19.0
+  contact:
+    name: Vineyard Community
+    url: https://v6d.io/
+  license:
+    name: Apache 2.0
+    url: https://github.com/v6d-io/v6d/blob/main/LICENSE
+servers:
+- url: ipc://{socket}
+  description: IPC socket connection (local zero-copy access)
+  variables:
+    socket:
+      default: /var/run/vineyard.sock
+- url: tcp://{host}:{port}
+  description: RPC TCP connection (remote access)
+  variables:
+    host:
+      default: localhost
+    port:
+      default: '9600'
+tags:
+- name: Connection
+  description: Connect to and disconnect from a vineyard server
+paths:
+  /connect:
+    post:
+      operationId: connectToServer
+      summary: Connect to Server
+      description: Establish a connection to a vineyard server via IPC socket or TCP endpoint. Returns a client object (IPCClient or RPCClient) for subsequent operations.
+      tags:
+      - Connection
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                socket:
+                  type: string
+                  description: UNIX domain socket path for IPC connection
+                  example: /var/run/vineyard.sock
+                host:
+                  type: string
+                  description: Hostname for RPC TCP connection
+                port:
+                  type: integer
+                  description: Port number for RPC TCP connection
+                  example: 9600
+      responses:
+        '200':
+          description: Successfully connected to vineyard server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientInfo'
+        '503':
+          description: Server unavailable or connection failed
+components:
+  schemas:
+    ClientInfo:
+      type: object
+      description: Information about the established vineyard client connection
+      properties:
+        instance_id:
+          type: integer
+          description: The vineyard instance ID this client is connected to
+        version:
+          type: string
+          description: Vineyard server version
+        ipc_socket:
+          type: string
+          description: IPC socket path (for IPCClient)
+        rpc_endpoint:
+          type: string
+          description: RPC endpoint (for RPCClient)
+externalDocs:
+  description: Vineyard Python API Reference
+  url: https://v6d.io/notes/references/python-api.html
