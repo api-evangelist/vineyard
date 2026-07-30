@@ -1,4 +1,17 @@
 aid: vineyard
+accessModel:
+  pricing: freemium
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Freemium
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/vineyard.png
 name: Vineyard
 description: >-
   Vineyard (v6d) is an in-memory immutable data manager developed under CNCF TAG-Storage. It provides efficient
@@ -24,56 +37,115 @@ created: '2025'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: vineyard:vineyard-python-client
-    name: Vineyard Python Client API
-    description: >-
-      The Vineyard Python client API provides programmatic access to the Vineyard in-memory data manager. It supports
-      IPC (UNIX domain socket) and RPC (TCP) connections for storing, retrieving, and managing distributed in-memory
-      objects. Key operations include put, get, delete, persist, and metadata inspection.
-    humanURL: https://v6d.io/notes/references/python-api.html
-    tags:
-      - Python
-      - Client
-      - In-Memory Storage
-      - Distributed Systems
-    properties:
-      - type: OpenAPI
-        url: openapi/vineyard-python-client-openapi.yml
-      - type: Documentation
-        url: https://v6d.io/notes/references/python-api.html
-      - type: GettingStarted
-        url: https://v6d.io/notes/getting-started.html
-  - aid: vineyard:vineyard-kubernetes-operator
-    name: Vineyard Kubernetes Operator
-    description: >-
-      The Vineyard Kubernetes Operator manages vineyard cluster lifecycle and orchestrates shared objects on Kubernetes.
-      It defines CRDs including Vineyardd, Sidecar, GlobalObject, LocalObject, Backup, Recover, Operation, and CSIDriver
-      for deploying and managing Vineyard in cloud-native environments.
-    humanURL: https://v6d.io/notes/cloud-native/vineyard-operator.html
-    tags:
-      - Kubernetes
-      - Operator
-      - Cloud Native
-      - CNCF
-    properties:
-      - type: Documentation
-        url: https://v6d.io/notes/cloud-native/vineyard-operator.html
-      - type: Documentation
-        url: https://v6d.io/notes/references/crds.html
-      - type: KubernetesCRD
-        url: crd/vineyardd-crd.yaml
-      - type: KubernetesCRD
-        url: crd/localobject-crd.yaml
-      - type: KubernetesCRD
-        url: crd/globalobject-crd.yaml
-      - type: KubernetesCRD
-        url: crd/sidecar-crd.yaml
-      - type: KubernetesCRD
-        url: crd/operation-crd.yaml
-      - type: KubernetesCRD
-        url: crd/backup-crd.yaml
-      - type: KubernetesCRD
-        url: crd/recover-crd.yaml
+- aid: vineyard:vineyard-kubernetes-operator
+  name: Vineyard Kubernetes Operator
+  description: >-
+    The Vineyard Kubernetes Operator manages vineyard cluster lifecycle and orchestrates shared objects
+    on Kubernetes. It defines CRDs including Vineyardd, Sidecar, GlobalObject, LocalObject, Backup, Recover,
+    Operation, and CSIDriver for deploying and managing Vineyard in cloud-native environments.
+  humanURL: https://v6d.io/notes/cloud-native/vineyard-operator.html
+  tags:
+  - Kubernetes
+  - Operator
+  - Cloud Native
+  - CNCF
+  properties:
+  - type: Documentation
+    url: https://v6d.io/notes/cloud-native/vineyard-operator.html
+  - type: Documentation
+    url: https://v6d.io/notes/references/crds.html
+  - type: KubernetesCRD
+    url: crd/vineyardd-crd.yaml
+  - type: KubernetesCRD
+    url: crd/localobject-crd.yaml
+  - type: KubernetesCRD
+    url: crd/globalobject-crd.yaml
+  - type: KubernetesCRD
+    url: crd/sidecar-crd.yaml
+  - type: KubernetesCRD
+    url: crd/operation-crd.yaml
+  - type: KubernetesCRD
+    url: crd/backup-crd.yaml
+  - type: KubernetesCRD
+    url: crd/recover-crd.yaml
+- aid: vineyard:vineyard-blobs-api
+  name: Vineyard Blobs API
+  description: Low-level blob storage operations
+  humanURL: https://v6d.io/notes/references/python-api.html
+  tags:
+  - Blobs
+  properties:
+  - type: OpenAPI
+    url: openapi/vineyard-blobs-api-openapi.yml
+  - type: Documentation
+    url: https://v6d.io/notes/references/python-api.html
+  - type: GettingStarted
+    url: https://v6d.io/notes/getting-started.html
+- aid: vineyard:vineyard-connection-api
+  name: Vineyard Connection API
+  description: Connect to and disconnect from a vineyard server
+  humanURL: https://v6d.io/notes/references/python-api.html
+  tags:
+  - Connection
+  properties:
+  - type: OpenAPI
+    url: openapi/vineyard-connection-api-openapi.yml
+  - type: Documentation
+    url: https://v6d.io/notes/references/python-api.html
+  - type: GettingStarted
+    url: https://v6d.io/notes/getting-started.html
+- aid: vineyard:vineyard-metadata-api
+  name: Vineyard Metadata API
+  description: Inspect and manage object metadata
+  humanURL: https://v6d.io/notes/references/python-api.html
+  tags:
+  - Metadata
+  properties:
+  - type: OpenAPI
+    url: openapi/vineyard-metadata-api-openapi.yml
+  - type: Documentation
+    url: https://v6d.io/notes/references/python-api.html
+  - type: GettingStarted
+    url: https://v6d.io/notes/getting-started.html
+- aid: vineyard:vineyard-names-api
+  name: Vineyard Names API
+  description: Associate human-readable names with object IDs
+  humanURL: https://v6d.io/notes/references/python-api.html
+  tags:
+  - Names
+  properties:
+  - type: OpenAPI
+    url: openapi/vineyard-names-api-openapi.yml
+  - type: Documentation
+    url: https://v6d.io/notes/references/python-api.html
+  - type: GettingStarted
+    url: https://v6d.io/notes/getting-started.html
+- aid: vineyard:vineyard-objects-api
+  name: Vineyard Objects API
+  description: Store and retrieve in-memory objects
+  humanURL: https://v6d.io/notes/references/python-api.html
+  tags:
+  - Objects
+  properties:
+  - type: OpenAPI
+    url: openapi/vineyard-objects-api-openapi.yml
+  - type: Documentation
+    url: https://v6d.io/notes/references/python-api.html
+  - type: GettingStarted
+    url: https://v6d.io/notes/getting-started.html
+- aid: vineyard:vineyard-persistence-api
+  name: Vineyard Persistence API
+  description: Persist objects for cross-instance visibility
+  humanURL: https://v6d.io/notes/references/python-api.html
+  tags:
+  - Persistence
+  properties:
+  - type: OpenAPI
+    url: openapi/vineyard-persistence-api-openapi.yml
+  - type: Documentation
+    url: https://v6d.io/notes/references/python-api.html
+  - type: GettingStarted
+    url: https://v6d.io/notes/getting-started.html
 common:
   - type: AgenticAccess
     url: agentic-access/vineyard-agentic-access.yml
