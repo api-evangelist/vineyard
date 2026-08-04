@@ -1,0 +1,24 @@
+{
+  "provider": "vineyard",
+  "sources": [
+    "vineyard-blobs-api-openapi.yml",
+    "vineyard-connection-api-openapi.yml",
+    "vineyard-metadata-api-openapi.yml",
+    "vineyard-names-api-openapi.yml",
+    "vineyard-objects-api-openapi.yml",
+    "vineyard-persistence-api-openapi.yml"
+  ],
+  "outputs": [
+    "vineyard-blobs-api-openapi.yml",
+    "vineyard-connection-api-openapi.yml",
+    "vineyard-metadata-api-openapi.yml",
+    "vineyard-names-api-openapi.yml",
+    "vineyard-objects-api-openapi.yml",
+    "vineyard-persistence-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
