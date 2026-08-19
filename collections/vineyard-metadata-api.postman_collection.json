@@ -1,0 +1,197 @@
+{
+  "item": [
+    {
+      "id": "240d057c-29fc-47ec-80d7-1afe382108ee",
+      "name": "Metadata",
+      "description": {
+        "content": "Inspect and manage object metadata",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "138869e8-bf7b-4b17-813b-fc4af798d1e6",
+          "name": "Get Object Metadata",
+          "request": {
+            "name": "Get Object Metadata",
+            "description": {
+              "content": "Fetch the metadata of a vineyard object, including typename, nbytes, isglobal, islocal, and all custom key-value metadata properties.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "objects",
+                ":objectId",
+                "metadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "objectId",
+                  "description": "(Required) The ObjectID to inspect"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{socket}}",
+                  "key": "socket"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8c64f753-e5ac-4373-bcd9-2c091d2d85b8",
+              "name": "Metadata retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objects",
+                    ":objectId",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "objectId",
+                      "description": "(Required) The ObjectID to inspect"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{socket}}",
+                      "key": "socket"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"typename\": \"string\",\n  \"nbytes\": 9986,\n  \"isglobal\": true,\n  \"islocal\": false,\n  \"instance_id\": 6719,\n  \"hostname\": \"string\",\n  \"extra\": {\n    \"key_0\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f26bd63-6bf5-44cc-b20f-fba426747452",
+              "name": "Object not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objects",
+                    ":objectId",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "objectId",
+                      "description": "(Required) The ObjectID to inspect"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{socket}}",
+                      "key": "socket"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "/var/run/vineyard.sock",
+      "key": "socket"
+    },
+    {
+      "type": "string",
+      "value": "ipc://{{socket}}",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8e965856-cc22-489f-9266-312d886b95e3",
+    "name": "Vineyard Python Client Blobs Metadata API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Vineyard Python client API provides programmatic access to the Vineyard in-memory immutable data manager (v6d), a CNCF project. Clients connect via IPC (UNIX domain socket) for zero-copy local access or via RPC (TCP) for remote access. The API supports storing, retrieving, naming, persisting, and deleting distributed in-memory objects.\n\nContact Support:\n Name: Vineyard Community",
+      "type": "text/plain"
+    }
+  }
+}

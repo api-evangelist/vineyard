@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vineyard Python Client Blobs Metadata API",
+    "version": "0.19.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Object Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "ipc://{socket}/objects/:objectId/metadata",
+            "params": [
+              {
+                "name": "objectId",
+                "value": "",
+                "type": "path",
+                "description": "The ObjectID to inspect"
+              }
+            ]
+          },
+          "docs": "Fetch the metadata of a vineyard object, including typename, nbytes, isglobal, islocal, and all custom key-value metadata properties."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

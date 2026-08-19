@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vineyard Python Client Blobs Names API",
+    "version": "0.19.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Names",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Associate Name with Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "ipc://{socket}/names",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Associate a human-readable name string with a vineyard ObjectID."
+        },
+        {
+          "info": {
+            "name": "Get Object by Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "ipc://{socket}/names/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The human-readable name"
+              },
+              {
+                "name": "wait",
+                "value": "",
+                "type": "query",
+                "description": "Block until the name becomes available"
+              }
+            ]
+          },
+          "docs": "Retrieve the ObjectID associated with a human-readable name."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,322 @@
+{
+  "item": [
+    {
+      "id": "6619101f-0ce9-436b-bc5c-70c548662886",
+      "name": "Blobs",
+      "description": {
+        "content": "Low-level blob storage operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "46882c7c-7104-47e1-bbd6-38f1df83d305",
+          "name": "Create Blob",
+          "request": {
+            "name": "Create Blob",
+            "description": {
+              "content": "Allocate a raw memory blob of the specified size in vineyard.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "blobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{socket}}",
+                  "key": "socket"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"size\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8a2a8232-e0b5-4030-bd36-55205072b0c4",
+              "name": "Blob created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{socket}}",
+                      "key": "socket"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"size\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object_id\": \"string\",\n  \"size\": 9906,\n  \"buffer\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1628ba90-b92e-4a1d-82bc-6815207c0d1c",
+          "name": "Get Blob",
+          "request": {
+            "name": "Get Blob",
+            "description": {
+              "content": "Retrieve a raw memory blob by its ObjectID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "blobs",
+                ":objectId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "remote",
+                  "value": "false",
+                  "description": "Retrieve blob from a remote vineyard instance"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "objectId",
+                  "description": "(Required) "
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{socket}}",
+                  "key": "socket"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b5fa849b-136b-430f-ade1-5c597b6322ec",
+              "name": "Blob retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blobs",
+                    ":objectId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "remote",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "objectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{socket}}",
+                      "key": "socket"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"object_id\": \"string\",\n  \"size\": 9906,\n  \"buffer\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8058098f-d4f7-4dcf-9ffb-b5b0856508a2",
+              "name": "Blob not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blobs",
+                    ":objectId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "remote",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "objectId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{socket}}",
+                      "key": "socket"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "/var/run/vineyard.sock",
+      "key": "socket"
+    },
+    {
+      "type": "string",
+      "value": "ipc://{{socket}}",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "031fcec7-322e-4bbd-a5f6-c8d588aa5a37",
+    "name": "Vineyard Python Client Blobs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Vineyard Python client API provides programmatic access to the Vineyard in-memory immutable data manager (v6d), a CNCF project. Clients connect via IPC (UNIX domain socket) for zero-copy local access or via RPC (TCP) for remote access. The API supports storing, retrieving, naming, persisting, and deleting distributed in-memory objects.\n\nContact Support:\n Name: Vineyard Community",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,185 @@
+{
+  "item": [
+    {
+      "id": "a8a6e9f4-7259-4a8c-9c85-33a0fe1bc8d6",
+      "name": "Persistence",
+      "description": {
+        "content": "Persist objects for cross-instance visibility",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1f1228b5-f1da-4a6d-9112-157f055318fc",
+          "name": "Persist Object",
+          "request": {
+            "name": "Persist Object",
+            "description": {
+              "content": "Make a vineyard object persistent, making it visible across all vineyard server instances in the cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "objects",
+                ":objectId",
+                "persist"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "objectId",
+                  "description": "(Required) The ObjectID to persist"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{socket}}",
+                  "key": "socket"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9ade3ecc-3a6d-497a-b42f-d85fec970ded",
+              "name": "Object persisted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objects",
+                    ":objectId",
+                    "persist"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "objectId",
+                      "description": "(Required) The ObjectID to persist"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{socket}}",
+                      "key": "socket"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2518bd74-eae6-47f8-b277-d35c532c18db",
+              "name": "Object not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objects",
+                    ":objectId",
+                    "persist"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "objectId",
+                      "description": "(Required) The ObjectID to persist"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{socket}}",
+                      "key": "socket"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "/var/run/vineyard.sock",
+      "key": "socket"
+    },
+    {
+      "type": "string",
+      "value": "ipc://{{socket}}",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8fa696e2-6540-44ed-9f91-6caae5f691d6",
+    "name": "Vineyard Python Client Blobs Persistence API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Vineyard Python client API provides programmatic access to the Vineyard in-memory immutable data manager (v6d), a CNCF project. Clients connect via IPC (UNIX domain socket) for zero-copy local access or via RPC (TCP) for remote access. The API supports storing, retrieving, naming, persisting, and deleting distributed in-memory objects.\n\nContact Support:\n Name: Vineyard Community",
+      "type": "text/plain"
+    }
+  }
+}

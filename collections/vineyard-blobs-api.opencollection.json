@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vineyard Python Client Blobs API",
+    "version": "0.19.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Blobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Blob",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "ipc://{socket}/blobs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allocate a raw memory blob of the specified size in vineyard."
+        },
+        {
+          "info": {
+            "name": "Get Blob",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "ipc://{socket}/blobs/:objectId",
+            "params": [
+              {
+                "name": "objectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "remote",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve blob from a remote vineyard instance"
+              }
+            ]
+          },
+          "docs": "Retrieve a raw memory blob by its ObjectID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vineyard Python Client Blobs Persistence API",
+    "version": "0.19.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Persistence",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Persist Object",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "ipc://{socket}/objects/:objectId/persist",
+            "params": [
+              {
+                "name": "objectId",
+                "value": "",
+                "type": "path",
+                "description": "The ObjectID to persist"
+              }
+            ]
+          },
+          "docs": "Make a vineyard object persistent, making it visible across all vineyard server instances in the cluster."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
