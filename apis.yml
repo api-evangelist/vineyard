@@ -24,6 +24,18 @@ url: https://v6d.io/
 tags:
   - Big Data
   - CNCF
+  - Cloud-Native
+  - Data Engineering
+  - Distributed Systems
+  - In-Memory Storage
+  - Kubernetes
+  - Machine-Learning
+  - Metadata Management
+  - Python
+  - Zero-Copy
+tags_raw:
+  - Big Data
+  - CNCF
   - Cloud Native
   - Data Engineering
   - Distributed Systems
@@ -45,6 +57,11 @@ apis:
     Operation, and CSIDriver for deploying and managing Vineyard in cloud-native environments.
   humanURL: https://v6d.io/notes/cloud-native/vineyard-operator.html
   tags:
+  - Kubernetes
+  - Operator
+  - Cloud-Native
+  - CNCF
+  tags_raw:
   - Kubernetes
   - Operator
   - Cloud Native
@@ -112,6 +129,8 @@ apis:
   description: Associate human-readable names with object IDs
   humanURL: https://v6d.io/notes/references/python-api.html
   tags:
+  - Name
+  tags_raw:
   - Names
   properties:
   - type: OpenAPI
