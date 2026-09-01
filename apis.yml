@@ -140,7 +140,7 @@ apis:
   description: Associate human-readable names with object IDs
   humanURL: https://v6d.io/notes/references/python-api.html
   tags:
-  - Names
+  - Name
   tags_raw:
   - Names
   properties:
