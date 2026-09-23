@@ -1,12 +1,7 @@
 {
   "provider": "vineyard",
   "sources": [
-    "vineyard-blobs-api-openapi.yml",
-    "vineyard-connection-api-openapi.yml",
-    "vineyard-metadata-api-openapi.yml",
-    "vineyard-names-api-openapi.yml",
-    "vineyard-objects-api-openapi.yml",
-    "vineyard-persistence-api-openapi.yml"
+    "_original/vineyard-python-client-openapi.yml"
   ],
   "outputs": [
     "vineyard-blobs-api-openapi.yml",
@@ -19,6 +14,17 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "vineyard-python-client-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "vineyard-blobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vineyard-connection-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vineyard-metadata-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vineyard-names-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vineyard-objects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vineyard-persistence-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
