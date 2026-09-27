@@ -1,14 +1,18 @@
 aid: vineyard
 deliveryModel:
   model: unknown
-  open_source: false
+  license_evidence:
+    not_product:
+    - v6d-io/v6d
+  open_source: unknown
   commercial: false
   callable_host: false
   label: Delivery model not determined — needs a product licence on record
   confidence: low
   source:
   - openapi
-  generated: '2026-08-28'
+  - repository-not-product
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: freemium
@@ -40,7 +44,7 @@ tags:
   - Distributed Systems
   - In-Memory Storage
   - Kubernetes
-  - Machine-Learning
+  - Machine Learning
   - Metadata Management
   - Python
   - Zero-Copy
@@ -56,6 +60,7 @@ tags_raw:
   - Metadata Management
   - Python
   - Zero-Copy
+  - Machine-Learning
 created: '2025'
 modified: '2026-05-19'
 specificationVersion: '0.23'
