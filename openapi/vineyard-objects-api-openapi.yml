@@ -112,6 +112,18 @@ paths:
           description: Object not found
 components:
   schemas:
+    ObjectResponse:
+      type: object
+      description: Response containing a retrieved vineyard object
+      properties:
+        object_id:
+          type: string
+          description: The ObjectID of the retrieved object
+        value:
+          description: The deserialized Python object value
+        typename:
+          type: string
+          description: The vineyard type name of the object
     ObjectIDResponse:
       type: object
       description: Response containing a vineyard ObjectID
@@ -132,18 +144,6 @@ components:
         name:
           type: string
           description: Optional human-readable name to associate
-    ObjectResponse:
-      type: object
-      description: Response containing a retrieved vineyard object
-      properties:
-        object_id:
-          type: string
-          description: The ObjectID of the retrieved object
-        value:
-          description: The deserialized Python object value
-        typename:
-          type: string
-          description: The vineyard type name of the object
 externalDocs:
   description: Vineyard Python API Reference
   url: https://v6d.io/notes/references/python-api.html
