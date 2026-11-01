@@ -1,4 +1,4 @@
-# Vineyard (vineyard)
+# Vineyard
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,96 +66,168 @@
 
 Vineyard (v6d) is an in-memory immutable data manager developed under CNCF TAG-Storage. It provides efficient zero-copy data sharing across distributed systems for big data analytics, machine learning, and data-intensive workflows. Vineyard enables seamless object sharing between computation engines through a metadata-payload separation architecture, supporting Python, C++, Rust, and Go clients. The Vineyard Operator provides Kubernetes-native deployment with CRDs for managing clusters, sidecars, backups, and data operations.
 
-**APIs.json:** [https://v6d.io/](https://v6d.io/)
+**Areas:** Big Data · CNCF · Cloud-Native · Data Engineering · Distributed Systems · In-Memory Storage · Kubernetes · Machine Learning · Metadata Management · Python · Zero-Copy
 
-## Scope
+## Vineyard on APIs.io
 
-- **Type:** Index
+Everything profiled for Vineyard is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/vineyard/](https://apis.io/providers/vineyard/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (7)
 
-- Big Data
-- CNCF
-- Cloud Native
-- Data Engineering
-- Distributed Systems
-- In-Memory Storage
-- Kubernetes
-- Machine Learning
-- Metadata Management
-- Python
-- Zero-Copy
+- [Vineyard Kubernetes Operator](https://apis.io/apis/vineyard/vineyard-kubernetes-operator/) — The Vineyard Kubernetes Operator manages vineyard cluster lifecycle and orchestrates shared objects on Kubernetes. It defines CRDs including Vineyardd,…
+- [Vineyard Blobs API](https://apis.io/apis/vineyard/vineyard-blobs-api/) — Low-level blob storage operations
+- [Vineyard Connection API](https://apis.io/apis/vineyard/vineyard-connection-api/) — Connect to and disconnect from a vineyard server
+- [Vineyard Metadata API](https://apis.io/apis/vineyard/vineyard-metadata-api/) — Inspect and manage object metadata
+- [Vineyard Names API](https://apis.io/apis/vineyard/vineyard-names-api/) — Associate human-readable names with object IDs
+- [Vineyard Objects API](https://apis.io/apis/vineyard/vineyard-objects-api/) — Store and retrieve in-memory objects
+- [Vineyard Persistence API](https://apis.io/apis/vineyard/vineyard-persistence-api/) — Persist objects for cross-instance visibility
 
-## Timestamps
+### Published properties
 
-- **Created:** 2025
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Vineyard Python Client API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-The Vineyard Python client API provides programmatic access to the Vineyard in-memory data manager. It supports IPC (UNIX domain socket) and RPC (TCP) connections for storing, retrieving, and managing distributed in-memory objects. Key operations include put, get, delete, persist, and metadata inspection.
+- [Vineyard Agentic Access](https://apis.io/agentic-access/vineyard/vineyard-agentic-access/)
 
-- **Human URL:** [https://v6d.io/notes/references/python-api.html](https://v6d.io/notes/references/python-api.html)
+#### JSON Schema (2)
 
-#### Tags
+The data models the API reads and writes.
 
-- Python
-- Client
-- In-Memory Storage
-- Distributed Systems
+- [Vineyard Object Metadata](https://apis.io/schemas/vineyard/vineyard-metadata/)
+- [Vineyard Object](https://apis.io/schemas/vineyard/vineyard-object/)
 
-#### Properties
+#### JSON Structure (1)
 
-- [OpenAPI](openapi/vineyard-python-client-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/vineyard-python-client.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/vineyard-python-client.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Documentation](https://v6d.io/notes/references/python-api.html)
-- [Getting Started](https://v6d.io/notes/getting-started.html)
+Data models expressed in JSON Structure.
 
-### Vineyard Kubernetes Operator
+- [Vineyard Object Structure](https://apis.io/json-structure/vineyard/vineyard-object-structure/)
 
-The Vineyard Kubernetes Operator manages vineyard cluster lifecycle and orchestrates shared objects on Kubernetes. It defines CRDs including Vineyardd, Sidecar, GlobalObject, LocalObject, Backup, Recover, Operation, and CSIDriver for deploying and managing Vineyard in cloud-native environments.
+#### JSON-LD (1)
 
-- **Human URL:** [https://v6d.io/notes/cloud-native/vineyard-operator.html](https://v6d.io/notes/cloud-native/vineyard-operator.html)
+Linked-data contexts for the provider's vocabulary.
 
-#### Tags
+- [Vineyard Context](https://apis.io/jsonld/vineyard/vineyard-context/)
 
-- Kubernetes
-- Operator
-- Cloud Native
-- CNCF
+#### Vocabulary (1)
 
-#### Properties
+The provider's domain terms, defined.
 
-- [Documentation](https://v6d.io/notes/cloud-native/vineyard-operator.html)
-- [Documentation](https://v6d.io/notes/references/crds.html)
-- [Kubernetes C R D](crd/vineyardd-crd.yaml)
-- [Kubernetes C R D](crd/localobject-crd.yaml)
-- [Kubernetes C R D](crd/globalobject-crd.yaml)
-- [Kubernetes C R D](crd/sidecar-crd.yaml)
-- [Kubernetes C R D](crd/operation-crd.yaml)
-- [Kubernetes C R D](crd/backup-crd.yaml)
-- [Kubernetes C R D](crd/recover-crd.yaml)
-- [Postman Collection](collections/vineyard-python-client.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/vineyard-python-client.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Vineyard Vocabulary](https://apis.io/vocabularies/vineyard/vineyard-vocabulary/)
 
-## Common Properties
+#### Examples (6)
 
-- [LinkedIn](https://www.linkedin.com/company/vineyard-vines)
+Example requests and responses.
+
+- [Vineyard Connect To Server Example](https://apis.io/examples/vineyard/vineyard-connect-to-server-example/)
+- [Vineyard Get By Name Example](https://apis.io/examples/vineyard/vineyard-get-by-name-example/)
+- [Vineyard Get Object Example](https://apis.io/examples/vineyard/vineyard-get-object-example/)
+- [Vineyard Get Object Metadata Example](https://apis.io/examples/vineyard/vineyard-get-object-metadata-example/)
+- [Vineyard Put Name Example](https://apis.io/examples/vineyard/vineyard-put-name-example/)
+- [Vineyard Put Object Example](https://apis.io/examples/vineyard/vineyard-put-object-example/)
+
+#### Collections (7)
+
+Postman and Open Collection request collections.
+
+- [Vineyard Python Client Blobs API](https://apis.io/collections/vineyard/open-vineyard-blobs-api/)
+- [Vineyard Python Client Blobs Connection API](https://apis.io/collections/vineyard/open-vineyard-connection-api/)
+- [Vineyard Python Client Blobs Metadata API](https://apis.io/collections/vineyard/open-vineyard-metadata-api/)
+- [Vineyard Python Client Blobs Names API](https://apis.io/collections/vineyard/open-vineyard-names-api/)
+- [Vineyard Python Client Blobs Objects API](https://apis.io/collections/vineyard/open-vineyard-objects-api/)
+- [Vineyard Python Client Blobs Persistence API](https://apis.io/collections/vineyard/open-vineyard-persistence-api/)
+- [Vineyard Python Client API](https://apis.io/collections/vineyard/open-vineyard-python-client/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Vineyard — jsonschema rules](https://apis.io/rules/vineyard/vineyard-jsonschema-spectral-rules/)
+- [Vineyard API Rules](https://apis.io/rules/vineyard/vineyard-rules/)
+
+#### Security (1)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Vineyard Domain Security](https://apis.io/security/vineyard/vineyard-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Vineyard Plans Pricing](https://apis.io/plans/vineyard/vineyard-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Vineyard Rate Limits](https://apis.io/rate-limits/vineyard/vineyard-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Vineyard Finops](https://apis.io/finops/vineyard/vineyard-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://v6d.io/)
 - [Documentation](https://v6d.io/docs.html)
-- [Git Hub Org](https://github.com/v6d-io)
-- [Git Hub](https://github.com/v6d-io/v6d)
-- [Getting Started](https://v6d.io/notes/getting-started.html)
-- [JSON Schema](json-schema/vineyard-object-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/vineyard-metadata-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/vineyard-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [Vocabulary](vocabulary/vineyard-vocabulary.yml)
-- [Spectral Rules](rules/vineyard-rules.yml)
+- [Getting started](https://v6d.io/notes/getting-started.html)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 28.2** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 64.3 |
+| Contract quality | 49.5 |
+| Contract governance | 27.3 |
+| Operational transparency | 13.2 |
+| Developer ergonomics | 21.4 |
+| Access clarity | 7.9 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 10.0** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/vineyard/](https://apis.io/providers/vineyard/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Vineyard: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/vineyard/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
